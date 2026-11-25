@@ -34,6 +34,14 @@ img.hero{width:100%;max-width:480px;height:auto;margin-inline:auto;border-radius
 .hrs{font-size:1.2rem;line-height:1.7}
 .btn.dir{background:var(--dirbg);color:var(--dirfg);border-color:var(--dirbg);font-weight:700;font-size:1.15rem;min-height:56px;width:100%;margin-top:14px;box-shadow:0 4px 14px rgba(31,122,102,.35)}
 .dir-big{min-height:56px;font-size:1.1rem;font-weight:700;background:var(--dirbg)!important;color:var(--dirfg)!important;border-color:var(--dirbg)!important}
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+@media(min-width:620px){.gal{grid-template-columns:repeat(3,1fr)}}
+.g{padding:0;border:0;min-height:0;display:block;border-radius:12px;overflow:hidden;background:var(--raised);aspect-ratio:3/4}
+.g img{width:100%;height:100%;object-fit:cover;display:block}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:100%;border-radius:10px}
+#lbx{position:absolute;top:12px;left:12px;background:#fff;color:#000;border-color:#fff}
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
 .chip[aria-pressed=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 .row{margin:12px 0}
@@ -71,6 +79,11 @@ footer{margin-top:44px;color:var(--ink3)}
 <li><b>الذكورة والعقم</b><span>تقييم ومتابعة حالات الذكورة وتأخر الإنجاب.</span></li>
 </ol>
 </section>
+<section id="gallery">
+<p class="eyebrow">صور</p><h2>معرض الصور</h2>
+<div class="gal"><button type="button" class="g" aria-label="عرض الصورة"><img src="g1.svg" alt="د. محمد سليم خليل" width="640" height="844" loading="lazy"></button><button type="button" class="g" aria-label="عرض الصورة"><img src="g2.svg" alt="د. محمد سليم خليل" width="640" height="873" loading="lazy"></button><button type="button" class="g" aria-label="عرض الصورة"><img src="g3.svg" alt="د. محمد سليم خليل" width="640" height="857" loading="lazy"></button><button type="button" class="g" aria-label="عرض الصورة"><img src="g4.svg" alt="د. محمد سليم خليل" width="640" height="857" loading="lazy"></button><button type="button" class="g" aria-label="عرض الصورة"><img src="g5.svg" alt="د. محمد سليم خليل" width="640" height="853" loading="lazy"></button><button type="button" class="g" aria-label="عرض الصورة"><img src="g6.svg" alt="د. محمد سليم خليل" width="640" height="853" loading="lazy"></button></div>
+</section>
+<div id="lb" role="dialog" aria-modal="true"><button type="button" id="lbx" aria-label="إغلاق">إغلاق</button><img alt=""></div>
 <section id="booking">
 <p class="eyebrow">الحجز</p><h2>احجز موعدك</h2>
 <p class="hrs"><b>مواعيد العيادة:</b> السبت إلى الأربعاء، من 4 العصر إلى <span style="white-space:nowrap">9 مساء</span></p>
@@ -126,6 +139,7 @@ function upd(){var t='أهلا، عايز أحجز '+val('kind')+' يوم '+val(
 document.querySelectorAll('.chips').forEach(function(g){g.onclick=function(e){var b=e.target.closest('button');if(!b)return;g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});upd()}});
 document.getElementById('pname').oninput=upd;upd();
 })();
+var lb=document.getElementById('lb');document.querySelectorAll('.gal .g').forEach(function(b){b.onclick=function(){var i=b.querySelector('img');lb.querySelector('img').src=i.src;lb.querySelector('img').alt=i.alt;lb.className='on'}});lb.onclick=function(){lb.className=''};document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.className=''});
 </script>
 </body>
-</html>
+  </html>
