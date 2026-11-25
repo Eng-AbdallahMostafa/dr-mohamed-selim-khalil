@@ -36,7 +36,7 @@ img.hero{width:100%;height:auto;border-radius:16px;display:block;margin-top:24px
 .row{margin:12px 0}
 .row label,.lbl{display:block;color:var(--ink3);font-size:.9rem;margin-bottom:6px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-input[type=text]{width:100%;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;padding:0 12px}
+input[type=text],input[type=tel],input[type=number]{width:100%;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;padding:0 12px}
 ol.list{list-style:none;padding:0;margin:0}
 ol.list li{padding:14px 0;border-bottom:1px solid var(--line)}
 ol.list b{display:block}ol.list span{color:var(--ink2)}
@@ -73,6 +73,8 @@ footer{margin-top:44px;color:var(--ink3)}
 <div class="row"><span class="lbl">اليوم</span><div class="chips" data-group="day"><button type="button" class="chip" aria-pressed="true">السبت</button><button type="button" class="chip" aria-pressed="false">الأحد</button><button type="button" class="chip" aria-pressed="false">الاثنين</button><button type="button" class="chip" aria-pressed="false">الثلاثاء</button><button type="button" class="chip" aria-pressed="false">الأربعاء</button></div></div>
 <div class="row"><span class="lbl">الفترة</span><div class="chips" data-group="slot"><button type="button" class="chip" aria-pressed="false">صباحا</button><button type="button" class="chip" aria-pressed="true">مساء</button></div></div>
 <div class="row"><label for="pname">اسم المريض</label><input type="text" id="pname" autocomplete="off"></div>
+<div class="row"><label for="pphone">رقم الموبايل</label><input type="tel" id="pphone" inputmode="tel" autocomplete="off"></div>
+<div class="row"><label for="page">السن</label><input type="number" id="page" inputmode="numeric" min="0" max="120" autocomplete="off"></div>
 <div class="btns"><a class="btn primary" id="wa" href="https://wa.me/201034104849" target="_blank" rel="noopener">ابعت طلب الحجز على واتساب</a></div>
 </section>
 <section id="faq">
@@ -114,9 +116,10 @@ setTheme(saved==='dark');
 btn.onclick=function(){var d=!root.classList.contains('dark');setTheme(d);try{localStorage.setItem('theme',d?'dark':'light')}catch(e){}};
 var sel={};
 function val(g){var c=document.querySelector('[data-group='+g+'] [aria-pressed=true]');return c?c.textContent:''}
-function upd(){var t='أهلا، عايز أحجز '+val('kind')+' يوم '+val('day')+' '+val('slot')+'. الاسم: '+(document.getElementById('pname').value.trim()||'...');document.getElementById('wa').href='https://wa.me/201034104849?text='+encodeURIComponent(t)}
+function g(i){return document.getElementById(i).value.trim()||'...'}
+function upd(){var t='أهلا، عايز أحجز '+val('kind')+' يوم '+val('day')+' '+val('slot')+'.\nالاسم: '+g('pname')+'\nرقم الموبايل: '+g('pphone')+'\nالسن: '+g('page');document.getElementById('wa').href='https://wa.me/201034104849?text='+encodeURIComponent(t)}
 document.querySelectorAll('.chips').forEach(function(g){g.onclick=function(e){var b=e.target.closest('button');if(!b)return;g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});upd()}});
-document.getElementById('pname').oninput=upd;upd();
+['pname','pphone','page'].forEach(function(i){document.getElementById(i).oninput=upd});upd();
 })();
 </script>
 </body>
