@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://eng-abdallahmostafa.github.io/dr-mohamed-selim-khalil/sitemap.xml
